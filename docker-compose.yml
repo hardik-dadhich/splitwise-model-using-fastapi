@@ -1,0 +1,30 @@
+version: '3.3'
+services:
+  backend:
+    build: .
+    environment:
+      DB_HOST: 'host.docker.internal'
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: splitwise
+    ports:
+      - 8000:8000
+    volumes:
+      - '.:/app.main'
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13.2
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: splitwise
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+      - ./db_schema.sql:/docker-entrypoint-initdb.d/db_schema.sql
+      # - ./dump:/docker-entrypoint-initdb.d
+    ports:
+      - 5432:5432

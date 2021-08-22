@@ -1,16 +1,10 @@
-from typing import Optional
-
+from app.routs.v1 import app_v1
 from fastapi import FastAPI
 
-app = FastAPI(title="SplitWise Api Documentation", description="Various CURD API Docs for Splitwise", version="1.0.0")
+# FastAPI route
+app = FastAPI(title="SplitWise CRUD API Documentation", description="Exposed APIs for Splitwise", version="1.0.0")
 
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+# Defining v1 route for versioning the application
+# So all route will start from prefix /v1/*
+app.include_router(app_v1, prefix="/v1")
 
