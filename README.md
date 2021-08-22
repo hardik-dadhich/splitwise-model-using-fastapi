@@ -13,7 +13,7 @@
 - Access this : `127.0.0.1:8000/docs`
 
 # Images:
-![screen][images/screen1.png]
+![screen](images/screen1.png)
 
 - youTube demo is here : https://www.youtube.com/watch?v=x127jwbUnp4
 
